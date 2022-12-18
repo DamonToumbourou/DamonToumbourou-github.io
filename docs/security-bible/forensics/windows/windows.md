@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Windows Forensics
+title: Windows Endpoint
 parent: Forensics
 grand_parent: Security Bible
 nav_order: 1
 ---
 
-# Windows Forensics
+# Windows Endpoint Forensics
 {: .no_toc }
 
 ## Table of contents
@@ -179,7 +179,7 @@ Location: NTUSER\Software\Microsoft\Office\<Version>\Word\Reading Location
 
 ```
 
- ### Windows Evidence of Application Execution
+### Windows Evidence of Application Execution
 
 ``` yaml
 # Shimcache 
@@ -222,8 +222,66 @@ Interpretation:
 Location:
 - Win 10 1903+: NTUSER\Software\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage
 
+# BAM/DAM
+Windows Background/Desktop Activity Moderator (BAM/DAM) is maintained by the Windows power 
+management sub-system. (Available in Win10+)
+Interpretation:
+- Provides full path of file executed and last execution date/time
+- Typically up to one week of data available
+- “State” key used in Win10 1809+
+Location:
+- SYSTEM\CurrentControlSet\Services\bam\State\UserSettings\{SID}
+- SYSTEM\CurrentControlSet\Services\dam\State\UserSettings\{SID
+
+# Amcache.hve
+Amcache tracks installed applications, programs executed (or present), drivers loaded, and more. 
+What sets this artifact apart is it also tracks the SHA1 hash for executables and drivers. (Available in Win7+)
+Interpretation:
+- A complete registry hive, with multiple sub-keys
+- Full path, file size, file modification time, compilation time, and publisher metadata
+- SHA1 hash of executables and drivers
+- Amcache should be used as an indication of executable and driver presence on the system, but not to prove actual execution
+Location:
+- C:\Windows\AppCompat\Programs\Amcache.hve
+
+# System Resource Usage Monitor (SRUM)
+SRUM records 30 to 60 days of historical system performance including applications run, user accounts responsible, 
+network connections, and bytes sent/received per application per hour.
+SRUDB.dat is an Extensible Storage Engine database 
+Interpretation:
+- Three tables in SRUDB.dat are particularly important:
+   - {973F5D5C-1D90-4944-BE8E-24B94231A174} = Network Data Usage
+   - {d10ca2fe-6fcf-4f6d-848e-b2e99266fa89} = Application Resource Usage
+   - {DD6636C4-8929-4683-974E-22C046A43763} = Network Connectivity Usage
+Location:
+- Win8+: C:\Windows\System32\SRU\SRUDB.dat
+
+# Jump Lists
+Windows Jump Lists allow user access to frequently or recently used items quickly via the task bar. 
+First introduced in Windows 7, they can identify applications in use and a wealth of metadata about items 
+accessed via those applications
+Interpretation: 
+- Each jump list file is named according to an application identifier (AppID). 
+List of Jump List IDs -> https://dfir.to/EZJumpList
+- Automatic Jump List Creation Time = First time an item added to the jump list. 
+Typically, the first time an object was opened by the application.
+- Automatic Jump List Modification Time = Last time item added to the jump list. 
+Typically, the last time the application opened an object. 
+Location:
+- %USERPROFILE%\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations
+
+# Last Visited MRU
+Tracks applications in use by the user and the directory location for the last file accessed by the application.
+Interpretation:
+- We get two important pieces of information from this key: 
+   - applications executed by the user, 
+   - and the last place in the file system that those applications interacted with. 
+   Interesting and hidden directories are often identified via this registry key.
+Location:
+- Win7+: NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU
+
 # Prefetch
-Designed to speed up applications’ startup processes. 
+Designed to speed up applications’ startup processes.
 File names consist of two parts: an executable name, and an eight-character hash of the executable’s location. 
 Prefetch files contain various metadata: executable name, run count, volume information, files and directories referenced by the executable, and of course, timestamps. 
 Interpretation: 
@@ -232,6 +290,22 @@ Interpretation:
 - since version 26 (Windows 8.1), the 7 most recent last run times.
 Location: %SystemRoot%\Prefetch
 
+# Commands Executed in the Run Dialog
+A history of commands typed into the Run dialog box are stored for each user.
+Interpretation:
+- It is an MRU key, so it has temporal order via the MRUList key
+Location:
+- NTUSER\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU
 
+# UserAssist
+UserAssist records metadata on GUI-based program executions.
+Interpretation:
+- GUIDs identify type of execution (Win7+)
+   - CEBFF5CD Executable File Execution
+   - F4E57C4B Shortcut File Execution
+- Values are ROT-13 Encoded
+- Application path, last run time, run count, focus time and focus count
+Location:
+- NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{GUID}\Count
 ```
 ---

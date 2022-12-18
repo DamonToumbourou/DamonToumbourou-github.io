@@ -20,7 +20,7 @@ has_children: true
 
 ## General Concepts 
 
-### ASN
+### Autonomous System Number (ASN)
 
 ``` yaml
 An autonomous system (AS) is a very large network or group of networks with a single routing policy. 
@@ -31,7 +31,7 @@ communications with inter-network routers.
 
 ```
 
-### BGP
+### Border Gateway Protocol (BGP)
 ``` yaml
 ASes announce their routing policy to other ASers and routers vai the Border Gateway Protocol (BGP). 
 BGP is the protocol for routing data packets between ASes. Without the routing information, 
@@ -47,7 +47,7 @@ space, all of this information has to be announced via BGP so that BGP routers c
 routing tables.
 ```
 
-### DMZ
+### Demilitarized Zones (DMZ)
 ``` yaml
 The term DMZ known as Demilitarized zone, is a type of network where you deploy all your public 
 internet-facing servers. It could be a web server, mail server, FTP server, etc. It is similar to 
@@ -59,6 +59,13 @@ We can also deploy a web server on the LAN side and allow external users to acce
 the internet, But that’s not a good security practice. If your web server on the LAN got compromised, 
 your entire LAN side of the network would be affected. For any public-facing traffic, it is recommended 
 to keep them on an isolated network such as DMZ instead on the LAN.
+```
+
+### Address Resolution Protocol (ARP)
+``` yaml
+ARP is a protocol specifically used to map IP network addresses to physical addresses, such as Ethernet addresses.
+
+It translates 32-bits addresses to 48-bits addresses and vice versa. This is needed because the most common level of internet protocol(IP) we use today is 32-bits long and MAC addresses are 48-bits long.
 ```
 
 ### IPSec
