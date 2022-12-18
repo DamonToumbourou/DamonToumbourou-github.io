@@ -44,7 +44,7 @@ exclude:
    - README.md
 
 # Set a path/url to a logo that will be displayed instead of the title
-#logo: "/assets/images/damon-toumbourou.png"
+logo: "/assets/images/damon-toumbourou.png"
 
 # Enable or disable the site search
 # Supports true (default) or false
@@ -100,8 +100,8 @@ nav_sort: case_sensitive # Capital letters sorted before lowercase
 
 # External navigation links
 nav_external_links:
-  - title: Just the Docs on GitHub
-    url: https://github.com/just-the-docs/just-the-docs
+  - title: Toumbourou on GitHub
+    url: https://github.com/DamonToumbourou
 
 # Footer content
 # appears at the bottom of every page's main content

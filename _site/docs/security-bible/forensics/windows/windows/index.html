@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><link rel="stylesheet" href="/notes/assets/css/just-the-docs-default.css"> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2709176-10"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-2709176-10', { 'anonymize_ip': true }); </script> <script src="/notes/assets/js/vendor/lunr.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.6/dist/mermaid.min.js"></script> <script src="/notes/assets/js/just-the-docs.js"></script><meta name="viewport" content="width=device-width, initial-scale=1"><title>Windows Forensics | Just the Docs</title><meta name="generator" content="Jekyll v4.3.1" /><meta property="og:title" content="Windows Forensics" /><meta property="og:locale" content="en_US" /><meta name="description" content="A Jekyll theme for documentation" /><meta property="og:description" content="A Jekyll theme for documentation" /><link rel="canonical" href="http://localhost:4000/notes/docs/security-bible/forensics/windows/windows/" /><meta property="og:url" content="http://localhost:4000/notes/docs/security-bible/forensics/windows/windows/" /><meta property="og:site_name" content="Just the Docs" /><meta property="og:type" content="website" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Windows Forensics" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"WebPage","description":"A Jekyll theme for documentation","headline":"Windows Forensics","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/notes/assets/images/damon-toumbourou.png"}},"url":"http://localhost:4000/notes/docs/security-bible/forensics/windows/windows/"}</script><link rel="shortcut icon" href="/notes/favicon.ico" type="image/x-icon"><body> <a class="skip-to-main" href="#main-content">Skip to main content</a> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"><title>Link</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"><title>Search</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"><title>Menu</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"><title>Expand</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"><title>Document</title><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> <symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><title id="svg-external-link-title">(external link)</title><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line> </symbol> </svg><div class="side-bar"><div class="site-header"> <a href="/notes/" class="site-title lh-tight"><div class="site-logo"></div></a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a></div><nav aria-label="Main" id="site-nav" class="site-nav"><ul class="nav-list"><li class="nav-list-item"><a href="/notes/" class="nav-list-link">Home</a><li class="nav-list-item active"><a href="#" class="nav-list-expander" aria-label="toggle links in Security Bible category"> <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> </a><a href="/notes/docs/security-bible" class="nav-list-link">Security Bible</a><ul class="nav-list "><li class="nav-list-item active"><a href="#" class="nav-list-expander" aria-label="toggle links in Forensics category"> <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> </a><a href="/notes/docs/security-bible/forensics" class="nav-list-link">Forensics</a><ul class="nav-list"><li class="nav-list-item active"> <a href="/notes/docs/security-bible/forensics/windows/windows/" class="nav-list-link active">Windows Forensics</a></ul><li class="nav-list-item "><a href="#" class="nav-list-expander" aria-label="toggle links in Incident Response category"> <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> </a><a href="/notes/docs/security-bible/incident-response" class="nav-list-link">Incident Response</a><ul class="nav-list"></ul><li class="nav-list-item "><a href="#" class="nav-list-expander" aria-label="toggle links in Networking category"> <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> </a><a href="/notes/docs/security-bible/networking" class="nav-list-link">Networking</a><ul class="nav-list"></ul><li class="nav-list-item "><a href="/notes/docs/security-bible/standards/standards/" class="nav-list-link">Standards</a></ul></ul><ul class="nav-list"><li class="nav-list-item external"> <a href="https://github.com/just-the-docs/just-the-docs" class="nav-list-link external"> Just the Docs on GitHub <svg viewBox="0 0 24 24" aria-labelledby="svg-external-link-title"><use xlink:href="#svg-external-link"></use></svg> </a></ul></nav><footer class="site-footer"> This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</footer></div><div class="main" id="top"><div id="main-header" class="main-header"><div class="search"><div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Just the Docs" aria-label="Search Just the Docs" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label></div><div id="search-results" class="search-results"></div></div><nav aria-label="Auxiliary" class="aux-nav"><ul class="aux-nav-list"><li class="aux-nav-list-item"> <a href="//github.com/just-the-docs/just-the-docs" class="site-button" > Just the Docs on GitHub </a></ul></nav></div><div id="main-content-wrap" class="main-content-wrap"><nav aria-label="Breadcrumb" class="breadcrumb-nav"><ol class="breadcrumb-nav-list"><li class="breadcrumb-nav-list-item"><a href="/notes/docs/security-bible">Security Bible</a><li class="breadcrumb-nav-list-item"><a href="/notes/docs/security-bible/forensics">Forensics</a><li class="breadcrumb-nav-list-item"><span>Windows Forensics</span></ol></nav><div id="main-content" class="main-content" role="main"><h1 class="no_toc" id="windows-forensics"> <a href="#windows-forensics" class="anchor-heading" aria-labelledby="windows-forensics"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Windows Forensics</h1><h2 class="no_toc text-delta" id="table-of-contents"> <a href="#table-of-contents" class="anchor-heading" aria-labelledby="table-of-contents"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Table of contents</h2><ol id="markdown-toc"><li><a href="#windows-endpoint-forensics" id="markdown-toc-windows-endpoint-forensics">Windows Endpoint Forensics</a><ol><li><a href="#windows-processes" id="markdown-toc-windows-processes">Windows Processes</a><li><a href="#windows-evidence-of-file-and-folder-opening" id="markdown-toc-windows-evidence-of-file-and-folder-opening">Windows Evidence of File and Folder Opening</a></ol></ol><hr /><h2 id="windows-endpoint-forensics"> <a href="#windows-endpoint-forensics" class="anchor-heading" aria-labelledby="windows-endpoint-forensics"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Windows Endpoint Forensics</h2><h3 id="windows-processes"> <a href="#windows-processes" class="anchor-heading" aria-labelledby="windows-processes"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Windows Processes</h3><div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># System </span>
+<span class="s">hosts threads that only run in kernel mode.</span>
+<span class="na">Image</span><span class="pi">:</span> <span class="err">%</span><span class="s">Systemroot%\System32\ntoskrnl.exe (Task Manager / Process Hacker) and None (Process Explorer)</span>
+
+<span class="c1"># ntoskrnl.exe </span>
+<span class="s">Windows NT operating system kernel executable. Acts as the central module (kernel) of the Windows OS.</span>
+
+<span class="c1"># smss.exe </span>
+<span class="s">Sessions manager process is the first user mode process. It’s responsible for creating the list of</span> 
+<span class="s">the environment variables, the security descriptors that’ll be used by the various system resources,</span> 
+<span class="s">initializing the rest of the registry (HKLM Software and the SAM and security hives) and a lot more.</span>
+
+<span class="pi">-</span> <span class="s">The system process creates the first SMSS instance and its known as the master SMSS.EXE process.</span> 
+<span class="s">It’s the only instance of SMSS.EXE that’ll stay after windows has booted up and one of the characteristics</span> 
+<span class="s">of this process is that it doesn’t have any command line arguments.</span>
+<span class="pi">-</span> <span class="s">The master SMSS process will create at least two instances of itself. One in “Session 0” (OS) that</span> 
+<span class="s">will be responsible for creating the “wininit.exe” process and another in “Session 1” (User) that’ll</span> 
+<span class="s">represent the first logged-on user and will create the “winlogon.exe”. Both will spawn a “csrss.exe” process.</span>
+<span class="pi">-</span> <span class="s">All the children SMSS.EXE processes created by the master SMSS.EXE process will exit after finishing their JOB.</span>
+
+<span class="c1"># Wininit.exe</span>
+<span class="s">Windows initialization process is responsible for initializing and setting a lot of things.</span>
+<span class="pi">-</span> <span class="s">It sets the default environment variables (USERPROFILE, ALLUSERPROFILE, PUBLIC and ProgramData).</span>
+<span class="pi">-</span> <span class="s">It creates the LSASS process and sets the LSA encryption key.</span>
+<span class="pi">-</span> <span class="s">It creates the Services Control manager by launching the SERVICES.EXE process</span>
+<span class="pi">-</span> <span class="s">It creates the temp directory in the system root (%Systemroot%\Temp).</span>
+
+<span class="c1"># regsvr32.exe </span>
+<span class="s">Is a command-line utility to register and unregister OLE controls, such as DLLs and ActiveX controls</span> 
+<span class="s">in the Windows Registry. Regsvr32.exe is installed in the %systemroot%\System32 folder in</span> 
+<span class="s">Windows XP and later versions of Windows.</span>
+
+<span class="na">Usage</span><span class="pi">:</span>
+<span class="s">$ Regsvr32 [/u] [/n] [/i[:cmdline]] &lt;dllname&gt;</span>
+<span class="pi">-</span> <span class="s">/u - Unregister server</span>
+<span class="pi">-</span> <span class="s">/i - Call DllInstall passing it an optional [cmdline]; when it is used with /u, it calls dll uninstall</span>
+<span class="pi">-</span> <span class="s">/n - do not call DllRegisterServer; this option must be used with /i</span>
+<span class="pi">-</span> <span class="s">/s – Silent; display no message boxes</span>
+
+<span class="c1"># rundll32.exe</span>
+<span class="s">Loads and runs 32bit dynamic-link libraries (DLLs).</span> 
+<span class="s">There are no configurable settings for Rundll32.</span>
+
+
+</code></pre></div></div><h3 id="windows-evidence-of-file-and-folder-opening"> <a href="#windows-evidence-of-file-and-folder-opening" class="anchor-heading" aria-labelledby="windows-evidence-of-file-and-folder-opening"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Windows Evidence of File and Folder Opening</h3><div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Open/Save MRU</span>
+<span class="s">Registry key tracks files that have been opened or saved within a Windows shell dialog box</span> 
+<span class="s">including web browsers and most applications.</span> 
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">The “*” key – This subkey tracks the most recent files of any extension input in an OpenSave dialog</span>
+<span class="pi">-</span> <span class="s">.??? (Three letter extension) – This subkey stores file info from the OpenSave dialog by specific extension</span>
+<span class="na">Location (Win7+)</span><span class="pi">:</span> <span class="s">NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\</span>
+<span class="s">OpenSavePIDlMRU</span>
+
+<span class="c1"># Last-Visit MRU</span>
+<span class="s">Tracks exe used by application to open files documented in Open/Save MRU the dir location</span> 
+<span class="s">for the last file that was accessed by that app.</span>
+<span class="na">Interpretation</span><span class="pi">:</span> <span class="s">We get two important pieces of information from this key</span>
+<span class="pi">-</span> <span class="s">applications executed by the user</span> 
+<span class="pi">-</span> <span class="s">and the last place in the file system that those applications interacted with.</span>
+<span class="pi">-</span> <span class="s">Interesting and hidden directories are often identified via this registry key.</span>
+<span class="na">Location (win7+)</span><span class="pi">:</span> <span class="s">NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\ComDlg32\LastVisitedPidlMRU</span>
+
+<span class="c1"># Recent Files</span>
+<span class="s">Registry key tracks the last files and folders opened and is used to populate data</span> 
+<span class="s">in ‘recent’ menus.</span> 
+<span class="na">Intepretation</span><span class="pi">:</span>
+    <span class="na">RecentDocs</span><span class="pi">:</span> <span class="s">Tracks overall order of the last 150 files or folders opened.</span>
+    <span class="s">.???</span><span class="err">:</span> <span class="s">These subkeys store the last 20 files opened by the user of each extension type.</span>
+    <span class="s">MRU list tracks the temporal order in which each file was opened.</span> 
+    <span class="s">The most recently used (MRU) item is associated with the last write time of the key,</span> 
+    <span class="s">providing one timestamp of file opening for each file extension type.</span>
+    <span class="na">Folder</span><span class="pi">:</span> <span class="s">This subkey stores the last 30 folders opened by the user.</span> 
+    <span class="s">The most recently used (MRU) item in this key is associated with the last write</span> 
+    <span class="s">time of the key, providing the time of opening for that folde</span>
+<span class="na">Location</span><span class="pi">:</span> <span class="s">NTUSER.DAT\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs</span>
+
+<span class="c1"># Jump Lists</span>
+<span class="s">Allows users to access frequently used items.</span>
+<span class="s">Data stored in AutomaticDestinations folder will each have a unique file prepended with the</span> 
+<span class="s">AppID of the association application and embedded with LNK files in each stream.</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Each jump list file is named according to an application identifier (AppID).</span> 
+    <span class="s">List of Jump List IDs -&gt; https://dfir.to/EZJumpList</span>
+<span class="pi">-</span> <span class="s">Each Jump List contains a collection of items interacted with (up to ~2000 items per application)</span>
+<span class="pi">-</span> <span class="s">Each entry is represented as a LNK shell item providing additional data</span>
+    <span class="s">- Target Timestamps</span>
+    <span class="s">- File Size</span>
+    <span class="s">- Local Drive | Removable Media | Network Share Info</span>
+    <span class="s">- Entries kept in MRU order including a timestamp for each item</span>
+<span class="na">Location</span><span class="pi">:</span>  
+<span class="pi">-</span> <span class="err">%</span><span class="s">USERPROFILE%\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations</span>
+<span class="pi">-</span> <span class="err">%</span><span class="s">USERPROFILE%\AppData\Roaming\Microsoft\Windows\Recent\CustomDestinations</span>
+
+<span class="c1"># Shell Bags:</span>
+<span class="s">Which folders were accessed on the local machine, network or removable device.</span>
+<span class="na">Explorer access</span><span class="pi">:</span> <span class="s">USRCLASS.DAT</span>
+<span class="na">Desktop Access</span><span class="pi">:</span> <span class="s">NTUSER.DAT</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Massive collection of data on folders accessed by each user</span>
+<span class="pi">-</span> <span class="s">Folder file system timestamps are archived in addition to first and last interaction times</span>
+<span class="pi">-</span> <span class="s">“Exotic” items recorded like mobile device info, control panel access, and Zip archive acces</span>
+<span class="na">Location</span><span class="pi">:</span>
+    <span class="s">Primary Data</span>
+    <span class="s">- USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\Bags</span>
+    <span class="s">- USRCLASS.DAT\Local Settings\Software\Microsoft\Windows\Shell\BagMRU</span>
+    <span class="s">Residual Desktop Items and Network Shares</span>
+    <span class="s">- NTUSER.DAT\Software\Microsoft\Windows\Shell\BagMRU</span>
+    <span class="s">- NTUSER.DAT\Software\Microsoft\Windows\Shell\Bags</span>
+
+<span class="c1"># Shortcut Files (LNK)</span>
+<span class="na">Shortcut files created for</span><span class="pi">:</span>
+<span class="s">Shortcut files are automatically created by Windows, tracking files and</span> 
+<span class="s">folders opened by a user</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Date/Time file of that name was first opened</span>
+    <span class="s">- Creation Date of Shortcut (LNK) File</span>
+<span class="pi">-</span> <span class="s">Date/Time file of that name was last opened</span>
+    <span class="s">- Last Modification Date of Shortcut (LNK) File</span>
+<span class="pi">-</span> <span class="s">LNK Target File (Internal LNK File Information) Data</span>
+    <span class="s">- Modified, Access, and Creation times of the target file</span>
+    <span class="s">- Volume Information (Name, Type, Serial Number)</span>
+    <span class="s">- Network Share information</span>
+    <span class="s">- Original Location</span>
+    <span class="s">- Name of System</span>
+<span class="na">Location</span><span class="pi">:</span>  
+<span class="pi">-</span> <span class="na">Win7+</span><span class="pi">:</span> <span class="err">%</span><span class="s">USERPROFILE%\AppData\Roaming\Microsoft\Windows\Recent\</span>
+<span class="pi">-</span> <span class="na">Win7+</span><span class="pi">:</span> <span class="err">%</span><span class="s">USERPROFILE%\AppData\Roaming\Microsoft\Office\Recent\</span>
+
+<span class="c1"># IE|Edge file://</span>
+<span class="s">Internet Explorer History databases have long held information on local and remote file access (via network shares),</span> 
+<span class="s">giving us an excellent means for determining files accessed on the system, per user.</span> 
+<span class="s">Information can be present even on Win11+ systems missing the Internet Explorer application.</span> 
+<span class="s">Not just related to internet browsing but also stores local, removable and remote (via network shares) file access.</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">Entries recorded as</span><span class="pi">:</span> <span class="s">file:///C:/directory/filename.ext</span>
+<span class="pi">-</span> <span class="s">Does not mean file was opened in a browse</span>
+<span class="na">Location</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">IE10–11 &amp; Win10+</span><span class="pi">:</span> <span class="err">%</span><span class="s">USERPROFILE%\AppData\Local\Microsoft\Windows\WebCache\WebCacheV*.dat</span>
+
+<span class="c1"># Office Recent Files</span>
+<span class="s">MS Office apps will track their own recent file</span>
+<span class="na">Location</span><span class="pi">:</span> <span class="s">NTUSER.DAT</span>
+
+<span class="c1"># MS Word Reading Locations</span>
+<span class="s">Starting with Word 2013, the last known position of the user within a Word document is recorded.</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Another source tracking recent documents opened</span>
+<span class="pi">-</span> <span class="s">The last closed time is also tracked along with the last position within the file</span>
+<span class="pi">-</span> <span class="s">Together with the last opened date in the Office File MRU key, a last session duration can be determined</span>
+<span class="na">Location</span><span class="pi">:</span> <span class="s">NTUSER\Software\Microsoft\Office\&lt;Version&gt;\Word\Reading Location</span>
+
+</code></pre></div></div><p>### Windows Evidence of Application Execution</p><div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Shimcache </span>
+<span class="s">The Windows Application Compatibility Database is used by Windows to identify possible</span> 
+<span class="s">application compatibility challenges with executables. It tracks the executable file path</span> 
+<span class="s">and binary last modified time.</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="s">Any executable present in the file system could be found in this key. Data</span> 
+<span class="s">can be particularly useful to identify the presence of malware on devices</span> 
+<span class="s">where other application execution data is missing (such as Windows servers).</span> 
+<span class="pi">-</span> <span class="s">Full path of executable</span>
+<span class="pi">-</span> <span class="s">Windows 7+ contains up to 1,024 entries (96 entries in WinXP)</span>
+<span class="pi">-</span> <span class="s">Post-WinXP no execution time is available</span> 
+<span class="pi">-</span> <span class="s">Executables can be preemptively added to the database prior to execution.</span> 
+<span class="pi">-</span> <span class="s">The existence of an executable in this key does not prove actual execution.</span>
+<span class="na">Location</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">Win7+</span><span class="pi">:</span> <span class="s">SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCach</span>
+
+<span class="c1"># Windows 10 Timeline</span>
+<span class="s">Win10 records recently used applications and files in a “timeline”</span> 
+<span class="s">database in SQLite format.</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Full path of executed application</span>
+<span class="pi">-</span> <span class="s">Start time, end time, and duration</span>
+<span class="pi">-</span> <span class="s">Items opened within application</span>
+<span class="pi">-</span> <span class="s">URLs visited</span>
+<span class="pi">-</span> <span class="s">Databases still present even after feature deprecation in late-Win10</span>
+<span class="na">Location</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">C:\Users\&lt;profile&gt;\AppData\Local\ConnectedDevicesPlatform\&lt;account-ID&gt;\ActivitiesCache.db</span>
+
+<span class="c1"># Task Bar Feature Usage</span>
+<span class="s">Tracks how a user has interacted with the taskbar.</span>
+<span class="na">Interpretation</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">Only tracks GUI applications</span>
+<span class="pi">-</span> <span class="s">Does not include timestamps</span>
+<span class="pi">-</span> <span class="s">AppLaunch tracks data only for pinned applications, showing user knowledge of the application</span> 
+    <span class="s">- Data persists after an application is unpinned</span>
+<span class="pi">-</span> <span class="s">AppSwitched tracks a count of application focus, showing user interaction directed at the application</span>
+    <span class="s">- Not tied to pinned applications</span>
+<span class="na">Location</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">Win 10 1903+</span><span class="pi">:</span> <span class="s">NTUSER\Software\Microsoft\Windows\CurrentVersion\Explorer\FeatureUsage</span>
+
+<span class="c1"># Prefetch</span>
+<span class="s">Designed to speed up applications’ startup processes.</span> 
+<span class="na">File names consist of two parts</span><span class="pi">:</span> <span class="s">an executable name, and an eight-character hash of the executable’s location.</span> 
+<span class="na">Prefetch files contain various metadata</span><span class="pi">:</span> <span class="s">executable name, run count, volume information, files and directories referenced by the executable, and of course, timestamps.</span> 
+<span class="na">Interpretation</span><span class="pi">:</span> 
+<span class="pi">-</span> <span class="s">file’s creation timestamp as the timestamp of the first execution.</span> 
+<span class="pi">-</span> <span class="s">embedded timestamp of the last execution</span>
+<span class="pi">-</span> <span class="s">since version 26 (Windows 8.1), the 7 most recent last run times.</span>
+<span class="na">Location</span><span class="pi">:</span> <span class="err">%</span><span class="s">SystemRoot%\Prefetch</span>
+
+
+</code></pre></div></div><hr /><hr><footer><p><a href="#top" id="back-to-top">Back to top</a></p><p class="text-small text-grey-dk-100 mb-0">Copyright &copy; 2017-2020 Patrick Marsceill. Distributed by an <a href="https://github.com/just-the-docs/just-the-docs/tree/main/LICENSE.txt">MIT license.</a> <a href="https://www.netlify.com/">This site is powered by Netlify.</a></p><div class="d-flex mt-2"><p class="text-small text-grey-dk-000 mb-0"> <a href="https://github.com/just-the-docs/just-the-docs/tree/main/docs/security-bible/forensics/windows/windows.md" id="edit-this-page">Edit this page on GitHub</a></p></div></footer></div></div><div class="search-overlay"></div></div><script> var config = {} ; mermaid.initialize(config); window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid')); </script>
